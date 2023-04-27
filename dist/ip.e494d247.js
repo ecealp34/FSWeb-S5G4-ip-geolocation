@@ -13511,56 +13511,105 @@ function _ipAdresimiAl() {
   }));
   return _ipAdresimiAl.apply(this, arguments);
 }
+var cardYapıcı = document.querySelector(".cards");
 ipAdresimiAl = function ipAdresimiAl() {
+  var api = null;
   _axios.default.get("https://apis.ergineer.com/ipgeoapi/46.196.64.180").then(function (response) {
-    alert(JSON.stringify(response.data));
+    api = response.data;
+    return api;
   }).catch(function (error) {
-    alert(error.data);
     console.log(error);
   }).finally(function () {
-    alert("Finally called");
+    console.log(api);
   });
 };
 console.log(ipAdresimiAl());
 var IPbul = function IPbul(card) {
   var container = document.createElement("div");
   container.setAttribute("class", "card");
-  var img = document.createElement("img");
-  img.setAttribute("src", card.image);
-  container.append(img);
+  var imgbayrak = document.createElement("img");
+  imgbayrak.setAttribute("src", card === null || card === void 0 ? void 0 : card.bayrakUrl);
+  container.append(imgbayrak);
   var containerSection = document.createElement("div");
   containerSection.setAttribute("class", "card-info");
   container.append(containerSection);
-  var h3 = document.createElement("h3");
-  h3.setAttribute("class", "ip");
-  h3.textContent = card.sorg;
-  containerSection.append(h3);
+  var yazi = document.createElement("h3");
+  yazi.setAttribute("class", "ip");
+  yazi.textContent = "IP: ".concat(card === null || card === void 0 ? void 0 : card.sorgu);
+  containerSection.append(yazi);
   var p = document.createElement("p");
   p.setAttribute("class", "ulke");
-  p.textContent = card.ulkeKodu;
+  p.textContent = "".concat(card === null || card === void 0 ? void 0 : card.ulke, "  (").concat(card === null || card === void 0 ? void 0 : card.ulkeKodu, ")");
   containerSection.append(p);
   var param2 = document.createElement("p");
-  param2.textContent = "Enlem: ".concat(card.enlem, " Boylam: ").concat(card.boylam);
+  param2.textContent = "Enlem: ".concat(card === null || card === void 0 ? void 0 : card.enlem, " Boylam: ").concat(card === null || card === void 0 ? void 0 : card.boylam);
   containerSection.append(param2);
   var param3 = document.createElement("p");
-  param3.textContent = "\u015Eehir: ".concat(card.sehir);
+  param3.textContent = "\u015Eehir: ".concat(card === null || card === void 0 ? void 0 : card.sehir);
   containerSection.append(param3);
   var param4 = document.createElement("p");
-  param4.textContent = "Saat Dilimi: ".concat(card.saatdilimi);
+  param4.textContent = "Saat Dilimi: ".concat(card === null || card === void 0 ? void 0 : card.saatdilimi);
   containerSection.append(param4);
   var param5 = document.createElement("p");
-  param5.textContent = "Para Dilimi: ".concat(card.parabirimi);
+  param5.textContent = "Para birimi: ".concat(card === null || card === void 0 ? void 0 : card.parabirimi);
   containerSection.append(param5);
   var param6 = document.createElement("p");
-  param6.textContent = "ISP: ".concat(card.isp);
+  param6.textContent = "ISP: ".concat(card === null || card === void 0 ? void 0 : card.isp);
   containerSection.append(param6);
   return container;
 };
-benimIP.forEach(function (card) {
-  var kart = IPbul(card);
-  var cards = document.getElementsByClassName("cards")[0];
-  cards.append(kart);
-});
+
+// benimIP.forEach((card) => {
+// 	const kart = IPbul(card); 	
+// 	const cards = document.querySelectorAll(".cards")[0];
+//  	cards.append("kart");
+//    });
+
+//    const IPbul = (card) => {
+// 	const container = document.createElement("div");
+// 	container.setAttribute("class", "card");
+
+// 	const imgbayrak = document.createElement("img");
+// 	img.setAttribute("src", card.image);
+//     container.append(imgbayrak);
+
+// 	const containerSection = document.createElement("div");
+// 	containerSection.setAttribute("class", "card-info");
+// 	container.append(containerSection)
+
+// 	const h3 = document.createElement("h3");
+// 	h3.setAttribute("class", "ip");
+// 	h3.textContent = card.sorgu
+//     containerSection.append(h3);
+
+// 	const p = document.createElement("p");
+// 	p.setAttribute("class","ulke")
+// 	p.textContent = card.ulkeKodu;
+// 	containerSection.append(p);
+
+// 	const param2 = document.createElement("p");
+// 	param2.textContent = `Enlem: ${card.enlem} Boylam: ${card?.boylam}`;
+// 	containerSection.append(param2);
+
+// 	const param3 = document.createElement("p");
+// 	param3.textContent = `Şehir: ${card.sehir}`;
+// 	containerSection.append(param3);
+
+// 	const param4 = document.createElement("p");
+// 	param4.textContent = `Saat Dilimi: ${card.saatdilimi}`;
+// 	containerSection.append(param4);
+
+// 	const param5 = document.createElement("p");
+// 	param5.textContent = `Para birimi: ${card.parabirimi}`;
+// 	containerSection.append(param5);
+
+// 	const param6 = document.createElement("p");
+// 	param6.textContent = `ISP: ${card.isp}`;
+// 	containerSection.append(param6);
+
+// 	return container;
+
+// }
 },{"axios":"node_modules/axios/index.js","babel-core/register":"node_modules/babel-core/register.js","babel-polyfill":"node_modules/babel-polyfill/lib/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -13586,7 +13635,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56967" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52861" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

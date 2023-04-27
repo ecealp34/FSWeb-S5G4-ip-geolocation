@@ -72,63 +72,68 @@ async function ipAdresimiAl(){
 
 
 //kodlar buraya gelecek
+const cardYapıcı = document.querySelector(".cards");
 
 ipAdresimiAl = () => {
+	let api = null;
 	axios.get("https://apis.ergineer.com/ipgeoapi/46.196.64.180") 
-.then(response => {
-	alert(JSON.stringify(response.data));
+.then(function(response) {
+	api = response.data
+	return api;
 })
-.catch(error => {
-	alert(error.data)
+.catch(function(error)  {
+	
 	console.log(error);
 })
 .finally(() => {
-	alert("Finally called");
-})
+	console.log(api);
+});
 
 }
+
+
 console.log(ipAdresimiAl());
 
 const IPbul = (card) => {
 	const container = document.createElement("div");
 	container.setAttribute("class", "card");
 
-	const img = document.createElement("img");
-	img.setAttribute("src", card.image);
-    container.append(img);
+	const imgbayrak = document.createElement("img");
+	imgbayrak.setAttribute("src", card?.bayrakUrl);
+    container.append(imgbayrak);
 
 	const containerSection = document.createElement("div");
 	containerSection.setAttribute("class", "card-info");
 	container.append(containerSection)
 	
-	const h3 = document.createElement("h3");
-	h3.setAttribute("class", "ip");
-	h3.textContent = card.sorg
-    containerSection.append(h3);
+	const yazi = document.createElement("h3");
+	yazi.setAttribute("class", "ip");
+	yazi.textContent = `IP: ${card?.sorgu}`;
+    containerSection.append(yazi);
    
 	const p = document.createElement("p");
 	p.setAttribute("class","ulke")
-	p.textContent = card.ulkeKodu;
+	p.textContent = `${card?.ulke}  (${card?.ulkeKodu})`
 	containerSection.append(p);
 	
 	const param2 = document.createElement("p");
-	param2.textContent = `Enlem: ${card.enlem} Boylam: ${card.boylam}`;
+	param2.textContent = `Enlem: ${card?.enlem} Boylam: ${card?.boylam}`;
 	containerSection.append(param2);
 
 	const param3 = document.createElement("p");
-	param3.textContent = `Şehir: ${card.sehir}`;
+	param3.textContent = `Şehir: ${card?.sehir}`;
 	containerSection.append(param3);
 
 	const param4 = document.createElement("p");
-	param4.textContent = `Saat Dilimi: ${card.saatdilimi}`;
+	param4.textContent = `Saat Dilimi: ${card?.saatdilimi}`;
 	containerSection.append(param4);
 
 	const param5 = document.createElement("p");
-	param5.textContent = `Para Dilimi: ${card.parabirimi}`;
+	param5.textContent = `Para birimi: ${card?.parabirimi}`;
 	containerSection.append(param5);
 
 	const param6 = document.createElement("p");
-	param6.textContent = `ISP: ${card.isp}`;
+	param6.textContent = `ISP: ${card?.isp}`;
 	containerSection.append(param6);
 
 	return container;
@@ -137,10 +142,59 @@ const IPbul = (card) => {
 
 
 
-benimIP.forEach((card) => {
-	const kart = IPbul(card);
-	const cards = document.getElementsByClassName("cards")[0];
-	cards.append(kart);
-  });
+
+
+
+// benimIP.forEach((card) => {
+// 	const kart = IPbul(card); 	
+// 	const cards = document.querySelectorAll(".cards")[0];
+//  	cards.append("kart");
+//    });
+
+
   
-  
+//    const IPbul = (card) => {
+// 	const container = document.createElement("div");
+// 	container.setAttribute("class", "card");
+
+// 	const imgbayrak = document.createElement("img");
+// 	img.setAttribute("src", card.image);
+//     container.append(imgbayrak);
+
+// 	const containerSection = document.createElement("div");
+// 	containerSection.setAttribute("class", "card-info");
+// 	container.append(containerSection)
+	
+// 	const h3 = document.createElement("h3");
+// 	h3.setAttribute("class", "ip");
+// 	h3.textContent = card.sorgu
+//     containerSection.append(h3);
+   
+// 	const p = document.createElement("p");
+// 	p.setAttribute("class","ulke")
+// 	p.textContent = card.ulkeKodu;
+// 	containerSection.append(p);
+	
+// 	const param2 = document.createElement("p");
+// 	param2.textContent = `Enlem: ${card.enlem} Boylam: ${card?.boylam}`;
+// 	containerSection.append(param2);
+
+// 	const param3 = document.createElement("p");
+// 	param3.textContent = `Şehir: ${card.sehir}`;
+// 	containerSection.append(param3);
+
+// 	const param4 = document.createElement("p");
+// 	param4.textContent = `Saat Dilimi: ${card.saatdilimi}`;
+// 	containerSection.append(param4);
+
+// 	const param5 = document.createElement("p");
+// 	param5.textContent = `Para birimi: ${card.parabirimi}`;
+// 	containerSection.append(param5);
+
+// 	const param6 = document.createElement("p");
+// 	param6.textContent = `ISP: ${card.isp}`;
+// 	containerSection.append(param6);
+
+// 	return container;
+
+// }
