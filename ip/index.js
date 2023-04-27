@@ -1,5 +1,7 @@
 //axios import buraya gelecek
 
+import axios from 'axios';
+
 var benimIP;
 
 
@@ -70,3 +72,75 @@ async function ipAdresimiAl(){
 
 
 //kodlar buraya gelecek
+
+ipAdresimiAl = () => {
+	axios.get("https://apis.ergineer.com/ipgeoapi/46.196.64.180") 
+.then(response => {
+	alert(JSON.stringify(response.data));
+})
+.catch(error => {
+	alert(error.data)
+	console.log(error);
+})
+.finally(() => {
+	alert("Finally called");
+})
+
+}
+console.log(ipAdresimiAl());
+
+const IPbul = (card) => {
+	const container = document.createElement("div");
+	container.setAttribute("class", "card");
+
+	const img = document.createElement("img");
+	img.setAttribute("src", card.image);
+    container.append(img);
+
+	const containerSection = document.createElement("div");
+	containerSection.setAttribute("class", "card-info");
+	container.append(containerSection)
+	
+	const h3 = document.createElement("h3");
+	h3.setAttribute("class", "ip");
+	h3.textContent = card.sorg
+    containerSection.append(h3);
+   
+	const p = document.createElement("p");
+	p.setAttribute("class","ulke")
+	p.textContent = card.ulkeKodu;
+	containerSection.append(p);
+	
+	const param2 = document.createElement("p");
+	param2.textContent = `Enlem: ${card.enlem} Boylam: ${card.boylam}`;
+	containerSection.append(param2);
+
+	const param3 = document.createElement("p");
+	param3.textContent = `Şehir: ${card.sehir}`;
+	containerSection.append(param3);
+
+	const param4 = document.createElement("p");
+	param4.textContent = `Saat Dilimi: ${card.saatdilimi}`;
+	containerSection.append(param4);
+
+	const param5 = document.createElement("p");
+	param5.textContent = `Para Dilimi: ${card.parabirimi}`;
+	containerSection.append(param5);
+
+	const param6 = document.createElement("p");
+	param6.textContent = `ISP: ${card.isp}`;
+	containerSection.append(param6);
+
+	return container;
+
+}
+
+
+
+benimIP.forEach((card) => {
+	const kart = IPbul(card);
+	const cards = document.getElementsByClassName("cards")[0];
+	cards.append(kart);
+  });
+  
+  
